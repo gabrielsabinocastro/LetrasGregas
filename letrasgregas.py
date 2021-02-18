@@ -2,8 +2,8 @@
 
 import numpy as np
 import scipy.stats as si
-import sympy as sy
-import sympy.stats as systats
+#import sympy as sy
+#import sympy.stats as systats
 
 ##################################################################################
 
