@@ -1,9 +1,47 @@
 #Bibliotecas
 
 import numpy as np
-import scipy.stats as si
+import scipy.stats as si  #para calcular distribuição normal cumulativa
+
+import yfinance as yf
+import pandas_datareader.data as web
+yf.pdr_override()
+
+# 1 - AS VARIÁVEIS #
+
+
+#valor do último preço de fechamento da ação
+
+ticker = 'ABEV.3'  #defina o código da ação na variável ticker
+
+year_data = web.get_data_yahoo(ticker, period="1y")["Adj Close"]
+S = year_data.iloc[-1]  
+
+S #para retornar o último preço de fechamento da ação
 
 ##################################################################################
+
+#valor da taxa livre de risco SELIC
+
+codigo_bcb = 1178  #1178 para consultar série histórica selic a.a.
+url = 'http://api.bcb.gov.br/dados/serie/bcdata.sgs.{}/dados?formato=json'.format(codigo_bcb)
+df = pd.read_json(url)
+df['data'] = pd.to_datetime(df['data'], dayfirst=True)
+df["valor"].iloc[-1]
+
+r = df["valor"].iloc[-1]/100
+
+r #para retornar a taxa livre de riscos SELIC ano
+
+
+
+##################################################################################
+
+#TODO: preparar códigos para imprimir volatilidade do ativo definido, além de consultar os preços de mercado para suas opções:  (sigma, call, put) 
+
+##################################################################################
+
+# 2 AS GREGAS #
 
 #DELTA
 
